@@ -8,7 +8,7 @@ Deep discriminative models (e.g. deep regression forests, deep Gaussian process)
 ## Getting Started：  
 
 * **Clone this repo:**  
-> git clone https://github.com/learninginvision/SPUDRFs
+> git clone https://github.com/learninginvision/SPUDRFs   
 cd SPUDFRs   
 
 * **Train SPUDRFs:**  
