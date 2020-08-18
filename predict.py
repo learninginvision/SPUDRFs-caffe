@@ -137,4 +137,4 @@ if __name__ == '__main__':
         
         fn = './testMAE/exp' + exp + '/'+ exp + '-paceMAE.txt'
         with open(fn, 'w') as f:
-            f.writelines(diff_ave)
+            f.writelines(diff_ave) 
