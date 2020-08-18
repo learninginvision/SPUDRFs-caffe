@@ -9,10 +9,10 @@ Deep discriminative models (e.g. deep regression forests, deep Gaussian process)
 cd SPUDFRs   
 
 * **Train SPUDRFs:**  
-- main.py: train SPUDRFs from scratch  
-- train.py: complete one pace training for given train set
-- predict.py: complete a test for given test set
-- picksamples.py: get the train set for next pace  
+- **main.py:** train SPUDRFs from scratch  
+- **train.py:** complete one pace training for given train set
+- **predict.py:** complete a test for given test set
+- **picksamples.py:** get the train set for next pace  
 
 ## Transplant:
 
