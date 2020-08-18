@@ -15,11 +15,11 @@ cd SPUDFRs
 You can train your SPUDRFs from scratch easily by running **main.py**. Here is a description of the main codes.  
     - **main.py:**   
 train SPUDRFs from scratch  
-- **train.py:**   
+    - **train.py:**   
 complete one pace training for given train set
-- **predict.py:**   
+    - **predict.py:**   
 complete a test for given test set
-- **picksamples.py:**   
+    - **picksamples.py:**   
 get the train set for next pace  
 
 ## Transplant:
