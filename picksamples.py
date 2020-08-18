@@ -113,7 +113,7 @@ class PickSamples():
         '''
         pick,left,pick_soft,left_soft,pred_sort,pick_ent = [],[],[],[],[],[]
         if pace == 0:
-            pick = []
+            pick = [] 
             left = self.readtxt(self.fn_traintxt0)
             
             if self.soft:
