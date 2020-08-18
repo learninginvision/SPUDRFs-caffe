@@ -72,7 +72,7 @@ for pace in range(0, len(alpha)+1):
         assert len(lines) > 2, 'predict entropy.txt is null!'
 
 def init():
-    train_dict = {}
+    train_dict = {} 
     train_dict['record'] = str(pace) + 'EPFL-VGG-NO.record'
     train_dict['data'] = str(pace) + 'EPFL-VGG-NO'
     train_dict['save'] = './checkpoints/M' + str(Exp) + '/'
