@@ -8,9 +8,7 @@ Deep discriminative models (e.g. deep regression forests, deep Gaussian process)
 > git clone https://github.com/learninginvision/SPUDRFs  
 cd SPUDFRs   
 
-**Train SPUDRFs: **
-
-You can train the SPUDRFs from scratch by running **main.py**.
+* **Train SPUDRFs: **  
 - main.py: train SPUDRFs from scratch  
 - train.py: complete one pace training for given train set
 - predict.py: complete a test for given test set
