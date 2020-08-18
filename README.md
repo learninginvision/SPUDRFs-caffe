@@ -4,8 +4,9 @@ Deep discriminative models (e.g. deep regression forests, deep Gaussian process)
 
 ## Getting Started：  
 
-* Installation  
-> git clone https://github.com/learninginvision/SPUDRFs.git
+* **Clone this repo:**  
+> git clone https://github.com/learninginvision/SPUDRFs  
+cd SPUDFRs
 You can train the SPUDRFs from scratch by running **main.py**.
 
 ## Transplant:
