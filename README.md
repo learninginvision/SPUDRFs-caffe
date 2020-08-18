@@ -9,6 +9,7 @@ Deep discriminative models (e.g. deep regression forests, deep Gaussian process)
 cd SPUDFRs   
 
 * **Train SPUDRFs:**  
+You can train your SPUDRFs from scratch easily by running **main.py**. Here is a description of the main codes.  
 - **main.py:** train SPUDRFs from scratch  
 - **train.py:** complete one pace training for given train set
 - **predict.py:** complete a test for given test set
