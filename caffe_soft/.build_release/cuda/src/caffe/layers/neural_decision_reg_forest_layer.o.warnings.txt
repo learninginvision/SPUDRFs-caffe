@@ -1,0 +1,12 @@
+src/caffe/layers/neural_decision_reg_forest_layer.cu(71): warning: variable "k" was declared but never referenced
+
+src/caffe/layers/neural_decision_reg_forest_layer.cu(71): warning: variable "k" was declared but never referenced
+
+src/caffe/layers/neural_decision_reg_forest_layer.cu(71): warning: variable "k" was declared but never referenced
+
+src/caffe/layers/neural_decision_reg_forest_layer.cu(71): warning: variable "k" was declared but never referenced
+
+src/caffe/layers/neural_decision_reg_forest_layer.cu(71): warning: variable "k" was declared but never referenced
+
+src/caffe/layers/neural_decision_reg_forest_layer.cu(71): warning: variable "k" was declared but never referenced
+
