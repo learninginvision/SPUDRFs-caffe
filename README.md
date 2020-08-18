@@ -2,10 +2,13 @@
 
 Deep discriminative models (e.g. deep regression forests, deep Gaussian process) have been extensively studied recently to solve problems such as facial age estimation and head pose estimation. Most existing methods pursue to achieve robust and unbiased solutions through either learning more discriminative features, or weighting samples. We argue what is more desirable is to gradually learn to discriminate like our human being, and hence we resort to self-paced learning (SPL). Then, a natural question arises: can self-paced regime guide deep discriminative models to obtain more robust and less unbiased solutions? To this end, this paper proposes a new deep discriminative model – self-paced deep regression forests considering sample uncertainty (SPUDRFs). It builds up a new self-paced learning paradigm: easy and underrepresented samples first. This paradigm could be extended to combine with a variety of deep discriminative models. Extensive experiments on two computer vision tasks, i.e., facial age estimation and head pose estimation, demonstrate the efficacy of SPUDRFs, where state-of-the-art performances are achieved. For detailed algorithm and experiment results please see paper published soon.
 
+## Result: ##  
+
+
 ## Getting Started：  
 
 * **Clone this repo:**  
-> git clone https://github.com/learninginvision/SPUDRFs  
+> git clone https://github.com/learninginvision/SPUDRFs
 cd SPUDFRs   
 
 * **Train SPUDRFs:**  
