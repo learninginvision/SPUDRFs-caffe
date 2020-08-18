@@ -19,8 +19,6 @@ Like [DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests), if you 
 - src/caffe/layers/neural_decision_reg_forest_loss_layer.cpp
 - src/caffe/layers/neural_decision_reg_forest_loss_layer.cu
 
-(testing) 
-
 - include/caffe/layers/neural_decision_reg_forest_layer.hpp 
 - src/caffe/layers/neural_decision_reg_forest_layer.cpp
 - src/caffe/layers/neural_decision_reg_forest_layer.cu
