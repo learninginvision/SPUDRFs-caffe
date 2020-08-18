@@ -56,7 +56,7 @@ class SPUDRFs():
             self.maxIter = 40000
         self.test_interval = 500  #
         self.test_batch_size = 16   #
-        self.train_batch_size = 32  #
+        self.train_batch_size = 32  # 
         self.test_iter = int(np.ceil(self.nTest / self.test_batch_size))
     
     def checkdir(self, tmp_dir):
