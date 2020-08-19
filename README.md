@@ -1,11 +1,17 @@
 # Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples
 
-This repo is for the 2020 ECCV paper [**Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples**](https://arxiv.org/abs/2004.01459v1). In this paper we propose a new deep discriminative model – self-paced deep regression forests considering sample uncertainty (SPUDRFs) based on self-pace learning (SPL). It builds up a new self-paced learning paradigm: easy and underrepresented samples first. This paradigm could be extended to combine with a variety of deep discriminative models. Extensive experiments on two computer vision tasks, i.e., facial age estimation and head pose estimation, demonstrate the efficacy of SPUDRFs, where state-of-the-art performances are achieved.      
+This repo is for the 2020 ECCV paper [**Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples**](https://arxiv.org/abs/2004.01459v4). In this paper we propose a new deep discriminative model – self-paced deep regression forests considering sample uncertainty (SPUDRFs) based on self-pace learning (SPL). It builds up a new self-paced learning paradigm: easy and underrepresented samples first. This paradigm could be extended to combine with a variety of deep discriminative models. Extensive experiments on two computer vision tasks, i.e., facial age estimation and head pose estimation, demonstrate the efficacy of SPUDRFs, where state-of-the-art performances are achieved.      
 
 ![figure1](https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png)   
 
-## Result: ##  
+## Performance: ##  
+- MORPH II   
+The MAEs of SP-DRFs and SPUDRFs at each pace descends gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.   
 
+
+- Biwi  
+The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For
+SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are concentrated in a small range, incurring seriously biased solutions. For SPUDRFs, the Gaussian means of leaf nodes (the orange points in the third row) distribute widely, leading to much better MAE performance.   
 
 ## Getting Started：  
 
