@@ -8,7 +8,7 @@ This repo is for the 2020 ECCV paper [**Self-Paced Deep Regression Forests with 
 - **MORPH II**   
 The MAEs of SP-DRFs and SPUDRFs at each pace descends gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.   
      
-![SPUDRFs_validation](https://github.com/learninginvision/SPUDRFs/blob/master/pic/SPUDRFs_validation.png =200x200)   
+![SPUDRFs_validation](https://github.com/learninginvision/SPUDRFs/blob/master/pic/SPUDRFs_validation.png){:height="50%" width="50%"}    
 
 - **Biwi**  
 The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For
