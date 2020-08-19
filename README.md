@@ -55,3 +55,5 @@ Like [DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests), if you 
 - include/caffe/layers/neural_decision_reg_forest_layer.hpp 
 - src/caffe/layers/neural_decision_reg_forest_layer.cpp
 - src/caffe/layers/neural_decision_reg_forest_layer.cu
+
+##Acknowledgments
