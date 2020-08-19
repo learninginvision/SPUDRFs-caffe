@@ -1,6 +1,6 @@
-# Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples
+# Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples
 
-This repo is for the 2020 ECCV paper [**Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples**](https://arxiv.org/abs/2004.01459v4). 
+This repo is for the 2020 ECCV paper [**Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples**](https://arxiv.org/abs/2004.01459v4). 
 
 In this paper we propose a new deep discriminative model – self-paced deep regression forests considering sample uncertainty (SPUDRFs) based on self-paced learning (SPL). It builds up a new self-paced learning paradigm: easy and underrepresented samples first. This paradigm could be extended to combine with a variety of deep discriminative models. Extensive experiments on two computer vision tasks, i.e., facial age estimation and head pose estimation, demonstrate the efficacy of SPUDRFs, where state-of-the-art performances are achieved.      
 
