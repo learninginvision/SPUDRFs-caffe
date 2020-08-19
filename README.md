@@ -18,7 +18,7 @@ SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are
     
 <img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="600">    
 
-## Getting Started：  
+## Getting Started
 
 * **Clone this repo:**  
 > git clone https://github.com/learninginvision/SPUDRFs   
@@ -35,7 +35,7 @@ complete a test for given test set
     - **picksamples.py:**   
 get the train set for next pace  
 
-## Transplant:
+## Transplant
 
 Like [DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests), if you have a different Caffe or CUDA version than this repository and would like to try out the proposed SPUDRFs layers, you can transplant the following code to your repository.
 
@@ -56,4 +56,5 @@ Like [DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests), if you 
 - src/caffe/layers/neural_decision_reg_forest_layer.cpp
 - src/caffe/layers/neural_decision_reg_forest_layer.cu
 
-##Acknowledgments
+## Acknowledgments
+This code is inspired by caffe-DRFs
