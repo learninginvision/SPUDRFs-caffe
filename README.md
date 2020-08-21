@@ -6,6 +6,10 @@ In this paper we propose a new deep discriminative model – self-paced deep reg
 
 ![figure1](https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png)   
 
+If you use this code for your research, please cite:
+Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples.
+Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.
+
 ## Performance: ##  
 - **Age Estimation on MORPH II Dataset**   
 The MAEs of SP-DRFs and SPUDRFs at each pace descends gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.   
