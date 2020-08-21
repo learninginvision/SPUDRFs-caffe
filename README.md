@@ -1,7 +1,7 @@
 # Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples
 
 <div align=center>
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="900">
+<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="00">
 </div>    
 
 
@@ -19,14 +19,18 @@ Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBz
 ## Performance ##  
 - **Age Estimation on MORPH II Dataset**   
 The MAEs of SP-DRFs and SPUDRFs at each pace descends gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.   
-     
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/SPUDRFs_validation.png" width="500">   
+
+<div align=center>
+<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/SPUDRFs_validation.png" width="500">
+</div>
 
 - **Head Pose Estimation on Biwi Dataset**  
 The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For
 SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are concentrated in a small range, incurring seriously biased solutions. For SPUDRFs, the Gaussian means of leaf nodes (the orange points in the third row) distribute widely, leading to much better MAE performance.   
-    
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="600">    
+
+<div align=center>
+<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="600"> 
+</div>
 
 ## Getting Started
 
