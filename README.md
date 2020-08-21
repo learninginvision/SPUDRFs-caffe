@@ -11,7 +11,7 @@ Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 [Bibtex]
 
 ## Poster Presentation ##
-Poster Presentation [PDF](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBzn6gEdC2JqUCiL/view?usp=sharing)
+Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBzn6gEdC2JqUCiL/view?usp=sharing)
 
 ## Performance ##  
 - **Age Estimation on MORPH II Dataset**   
