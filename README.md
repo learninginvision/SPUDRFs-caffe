@@ -47,7 +47,7 @@ complete one pace training for given train set
     - **predict.py:**   
 complete a test for given test set
     - **picksamples.py:**   
-get the train set for next pace  
+select samples for next pace  
 
 ## Transplant
 
