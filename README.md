@@ -1,7 +1,7 @@
 # Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples
 
 <div align=center>
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="00">
+<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="800">
 </div>    
 
 
@@ -11,7 +11,7 @@ If you use this code for your research, please cite:
 
 Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples.<br>
 Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
-[[Bibtex]](https://github.com/learninginvision/SPUDRFs/blob/master/pic/bib.txt)  [[pdf]](https://arxiv.org/abs/2004.01459v4)
+[[Bibtex]](https://github.com/learninginvision/SPUDRFs/blob/master/pic/bib.txt)  [[PDF]](https://arxiv.org/abs/2004.01459v4)
 
 ## Poster Presentation ##
 Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBzn6gEdC2JqUCiL/view?usp=sharing)
