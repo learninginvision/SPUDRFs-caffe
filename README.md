@@ -9,7 +9,7 @@ In this paper we propose a new deep discriminative model – self-paced deep reg
 If you use this code for your research, please cite:
 
 Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples.
-Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.
+-Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.
 
 ## Performance: ##  
 - **Age Estimation on MORPH II Dataset**   
