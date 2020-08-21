@@ -32,13 +32,13 @@ SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are
 <img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="800"> 
 </div>
 
-## Getting Started
+## Setup
 
-* **Clone this repo:**  
+### **Clone this repo:**  
 > git clone https://github.com/learninginvision/SPUDRFs   
 cd SPUDFRs   
 
-* **Train SPUDRFs:**  
+### **Train SPUDRFs:**  
 You can train your SPUDRFs from scratch easily by running **main.py**. Here is a description of the main codes.  
     - **main.py:**   
 train SPUDRFs from scratch  
