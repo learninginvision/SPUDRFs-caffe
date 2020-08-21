@@ -30,7 +30,7 @@ class PickSamples():
         self.scale = 0.15
         self.alpha = alpha
         self.random_pick = random_pick
-        self.soft = soft
+        self.soft = soft 
 
         self.fn_traintxt0 = './images/MORPH-train.txt'
         train_images = self.readtxt(self.fn_traintxt0)
