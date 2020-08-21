@@ -1,4 +1,4 @@
-@inproceedings{SPUDRFs,
+@inproceedings{2020SPUDRFs,
   title={Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples},
   author={Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu},
   booktitle={European Conference on Computer Vision},
