@@ -25,7 +25,7 @@ The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. T
 SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are concentrated in a small range, incurring seriously biased solutions. For SPUDRFs, the Gaussian means of leaf nodes (the orange points in the third row) distribute widely, leading to much better MAE performance.   
 
 <div align=center>
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="800"> 
+<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="600"> 
 </div>
 
 
