@@ -1,20 +1,26 @@
 # Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples
 
 <div align=center>
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="800">
+<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="600">
 </div>    
 
 
-Deep discriminative models (e.g. deep regression forests, deep neural decision forests) have achieved remarkable success recently to solve problems such as facial age estimation and head pose estimation. Most existing methods pursue robust and unbiased solutions either through learning discriminative features, or reweighting samples. We argue what is more desirable is learning gradually to discriminate like our human beings, and hence we resort to self-paced learning (SPL). Then, a natural question arises: can self-paced regime lead deep discriminative models to achieve more robust and less biased solutions? To this end, we propose a new deep discriminative model---self-paced deep regression forests with consideration on underrepresented examples (SPUDRFs). It tackles the fundamental ranking and selecting problem in SPL from a new perspective: fairness. This paradigm is fundamental and could be easily combined with a variety of deep discriminative models (DDMs). Extensive experiments on two computer vision tasks, i.e., facial age estimation and head pose estimation, demonstrate the efficacy of SPUDRFs, where state-of-the-art performances are achieved.
+Abstract: Deep discriminative models (e.g. deep regression forests, deep neural decision forests) have achieved remarkable success recently to solve problems such as facial age estimation and head pose estimation. Most existing methods pursue robust and unbiased solutions either through learning discriminative features, or reweighting samples. We argue what is more desirable is learning gradually to discriminate like our human beings, and hence we resort to self-paced learning (SPL). Then, a natural question arises: can self-paced regime lead deep discriminative models to achieve more robust and less biased solutions? To this end, we propose a new deep discriminative model---self-paced deep regression forests with consideration on underrepresented examples (SPUDRFs). It tackles the fundamental ranking and selecting problem in SPL from a new perspective: fairness. This paradigm is fundamental and could be easily combined with a variety of deep discriminative models (DDMs). Extensive experiments on two computer vision tasks, i.e., facial age estimation and head pose estimation, demonstrate the efficacy of SPUDRFs, where state-of-the-art performances are achieved.
+
+
+## Poster Presentation ##
+Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBzn6gEdC2JqUCiL/view?usp=sharing)
+
+
+
+## Code ##
+We provide our implementation of self-paced deep regression forests with consideration on underrepresentd samples.
 
 If you use this code for your research, please cite:
 
 Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples.<br>
 Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 [[Bibtex]](https://github.com/learninginvision/SPUDRFs/blob/master/pic/bib.txt)  [[PDF]](https://arxiv.org/abs/2004.01459v4)
-
-## Poster Presentation ##
-Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBzn6gEdC2JqUCiL/view?usp=sharing)
 
 ## Performance ##  
 ### **Age Estimation on MORPH II Dataset**   
