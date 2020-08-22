@@ -12,7 +12,7 @@ Abstract: Deep discriminative models (e.g. deep regression forests, deep neural 
 Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBzn6gEdC2JqUCiL/view?usp=sharing)
 
 
-## Performance  
+## Tasks and Performances  
 ### **Age Estimation on MORPH II Dataset**   
 The MAEs of SP-DRFs and SPUDRFs at each pace descends gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.   
 
