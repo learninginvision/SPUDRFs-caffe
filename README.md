@@ -43,7 +43,7 @@ Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 cd SPUDFRs   
 
 ### **Train SPUDRFs:**  
-You can train your SPUDRFs from scratch easily by running **main.py**. Here is a description of the main codes.  
+You can train your SPUDRFs from scratch easily by running **main.py**. Here is the description of the main codes.  
 - **main.py:**   
 train SPUDRFs from scratch  
 - **train.py:**   
