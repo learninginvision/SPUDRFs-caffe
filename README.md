@@ -17,7 +17,7 @@ Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBz
 <div align=center>
 <img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/SPUDRFs_validation_new.png" width="800">
 </div>
-The gradual learning process of SP-DRFs and SPUDRFs. **Left**: The typical worst cases at each iteration. The two numbers below each image are the real age (left) and predicted age (right). **Right**: The MAEs of SP-DRFs and SPUDRFs at each pace descend gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.
+The gradual learning process of SP-DRFs and SPUDRFs. __Left__: The typical worst cases at each iteration. The two numbers below each image are the real age (left) and predicted age (right). __Right__: The MAEs of SP-DRFs and SPUDRFs at each pace descend gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.
 
 ### **Head Pose Estimation on Biwi Dataset**  
 The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For
