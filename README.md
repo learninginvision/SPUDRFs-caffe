@@ -28,11 +28,11 @@ The gradual learning process of SP-DRFs and SPUDRFs. **Left:** The typical worst
 The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are concentrated in a small range, incurring seriously biased solutions. For SPUDRFs, the Gaussian means of leaf nodes (the orange points in the third row) distribute widely, leading to much better MAE performance.
 
 ## Code 
-We provide our implementation of self-paced deep regression forests with consideration on underrepresentd samples.
+We provide our implementation of self-paced deep regression forests with consideration on underrepresentd examples.
 
 If you use this code for your research, please cite:
 
-Self-Paced Deep Regression Forests with Consideration on Underrepresented Samples.<br>
+Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples.<br>
 Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 [[Bibtex]](https://github.com/learninginvision/SPUDRFs/blob/master/pic/bib.txt)  [[PDF]](https://arxiv.org/abs/2004.01459v4)
 
