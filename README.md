@@ -20,14 +20,12 @@ Poster Presentation [[PDF]](https://drive.google.com/file/d/1bD8ZTLP_6LxMHBdbNBz
 
 The gradual learning process of SP-DRFs and SPUDRFs. **Left:** The typical worst cases at each iteration. The two numbers below each image are the real age (left) and predicted age (right). **Right:** The MAEs of SP-DRFs and SPUDRFs at each pace descend gradually. The SPUDRFs show its superiority of taking predictive uncertainty into consideration, when compared with SP-DRFs.
 
-### **Head Pose Estimation on Biwi Dataset**  
-The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For
-SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are concentrated in a small range, incurring seriously biased solutions. For SPUDRFs, the Gaussian means of leaf nodes (the orange points in the third row) distribute widely, leading to much better MAE performance.   
-
+### **Head Pose Estimation on Biwi Dataset**   
 <div align=center>
 <img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Uncertainty_efficacy.png" width="600"> 
 </div>
 
+The leaf node distribution of SP-DRFs and SPUDRFs in gradual learning process. Three paces, i.e. pace 1, 3, and 6, are randomly chosen for visualization. For SP-DRFs, the Gaussian means of leaf nodes (the red points in the second row) are concentrated in a small range, incurring seriously biased solutions. For SPUDRFs, the Gaussian means of leaf nodes (the orange points in the third row) distribute widely, leading to much better MAE performance.
 
 ## Code 
 We provide our implementation of self-paced deep regression forests with consideration on underrepresentd samples.
