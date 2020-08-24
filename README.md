@@ -53,26 +53,5 @@ complete a test for given test set
 - **picksamples.py:**   
 select samples for next pace  
 
-## Transplant
-
-Like [DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests), if you have a different Caffe or CUDA version than this repository and would like to try out the proposed SPUDRFs layers, you can transplant the following code to your repository.
-
-(util) 
-
-- include/caffe/util/sampling.hpp
-- src/caffe/util/sampling.cpp
-- include/caffe/util/neural_decision_util_functions.hpp
-- src/caffe/util/neural_decision_util_functions.cu
-
-(training) 
-
-- include/caffe/layers/neural_decision_reg_forest_loss_layer.hpp 
-- src/caffe/layers/neural_decision_reg_forest_loss_layer.cpp
-- src/caffe/layers/neural_decision_reg_forest_loss_layer.cu
-
-- include/caffe/layers/neural_decision_reg_forest_layer.hpp 
-- src/caffe/layers/neural_decision_reg_forest_layer.cpp
-- src/caffe/layers/neural_decision_reg_forest_layer.cu
-
 ## Acknowledgments
 This code is inspired by [caffe-DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests).
