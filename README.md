@@ -75,4 +75,4 @@ Like [DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests), if you 
 - src/caffe/layers/neural_decision_reg_forest_layer.cu
 
 ## Acknowledgments
-This code is inspired by caffe-DRFs.
+This code is inspired by [caffe-DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests).
