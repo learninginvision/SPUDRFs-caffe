@@ -4,12 +4,9 @@ import train
 import predict
 from picksamples import PickSamples
 
-
 pace_percent = [0.5, 1.0/18, 1.0/18, 1.0/18, 1.0/18, 1.0/18, 1.0/18, 1.0/18, 1.0/18, 1.0/18]
-# pace_percent = [0.2, 0.2, 0.2, 0.2, 0.2]
-# alpha=[1.2, 0.9, 0.87, 0.85, 0.8]
 alpha=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15]
-ent_ths = []
+
 Exp = 1
 max_step = 40000 
 picksamples = PickSamples(exp=Exp, percent=pace_percent, pace=0, alpha=alpha, 
@@ -21,7 +18,7 @@ for pace in range(0, len(alpha)+1):
     left_txt, pick_txt = picksamples.pick(pace=pace)
     print('left_txt: %s' % left_txt)
     print('pick_txt: %s' % pick_txt)
-    # break
+    
     train_dict = {}
     train_dict['pace'] = pace
     train_dict['record'] = str(pace) + 'EPFL-VGG-NO.record'
@@ -30,10 +27,10 @@ for pace in range(0, len(alpha)+1):
     train_dict['tmp_dir'] = './tmp/Exp' + str(Exp) + '/'
     if pace == 0:
         train_dict['traintxt'] = left_txt
-        train_dict['base_weights'] = '/root/data/aishijie/FGNET/model/VGG_FACE.caffemodel'
+        train_dict['base_weights'] = './model/VGG_FACE.caffemodel'
     elif pace == 1: 
         train_dict['traintxt'] = pick_txt
-        train_dict['base_weights'] = '/root/data/aishijie/FGNET/model/VGG_FACE.caffemodel'
+        train_dict['base_weights'] = './model/VGG_FACE.caffemodel'
     else:
         train_dict['traintxt'] = pick_txt
         train_dict['base_weights'] = './checkpoints/M' + str(Exp) + '/' + str(pace-1) + \
@@ -43,7 +40,7 @@ for pace in range(0, len(alpha)+1):
 
     print(train_dict)
     net = train.SPUDRFs(parser_dict=train_dict)
-    net.train(pace)
+    net.train()
     with open('./Entropy.txt', 'r') as f:
         lines = f.readlines()
     assert len(lines) > 2, 'train entropy.txt is null!'
@@ -71,13 +68,3 @@ for pace in range(0, len(alpha)+1):
 
         assert len(lines) > 2, 'predict entropy.txt is null!'
 
-def init():
-    train_dict = {}
-    train_dict['record'] = str(pace) + 'EPFL-VGG-NO.record'
-    train_dict['data'] = str(pace) + 'EPFL-VGG-NO'
-    train_dict['save'] = './checkpoints/M' + str(Exp) + '/'
-    train_dict['tmp_dir'] = './tmp/Exp' + str(Exp) + '/'
-    train_dict['traintxt'] = './images/train_R.txt'
-    train_dict['testtxt'] = './images/test_R.txt'
-
-    train_dict['base_weights'] = '/root/data/aishijie/FGNET/model/VGG_FACE.caffemodel'
