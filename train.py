@@ -1,10 +1,7 @@
 # begin at 19:53
 import sys, os, re, urllib, time
 time.sleep(0)
-#sys.path.insert(0, '/root/data/aishijie/FGNET/caffe-DRFs/python')
-#sys.path.insert(0, '/root/data/meng/caffe-DeepRegressionForests/caffe-DRFs/python')
-# sys.path.insert(0, '/root/data/meng/caffe_entropy3/python')
-sys.path.insert(0, '/root/data/meng/caffe_soft/python')
+sys.path.insert(0, './caffe_soft/python')
 import caffe
 from caffe import layers as L, params as P, to_proto
 from caffe.coord_map import crop
@@ -21,9 +18,8 @@ class SPUDRFs():
 
     def __init__(self, parser_dict):
         self.parser_dict = parser_dict
-        # triantxt, testtxt, record, tree, depth, data
             
-        self.record_filename = self.parser_dict['record']  # '1AEPFL-VGG-3.6.record'
+        self.record_filename = self.parser_dict['record']  
         self.data = self.parser_dict['data']
         self.save = self.parser_dict['save']
         self.checkdir(self.save)
@@ -46,17 +42,16 @@ class SPUDRFs():
             self.nTest = len(f.readlines())
 
         
-        self.testdir = "/root/data/aishijie/Project/Morph_mtcnn_1.3_0.35_0.3/"
-        self.traindir = "/root/data/aishijie/Project/Morph_mtcnn_1.3_0.35_0.3/"
+        self.testdir = "./Morph_mtcnn_1.3_0.35_0.3/"
+        self.traindir = "./Morph_mtcnn_1.3_0.35_0.3/"
 
-        # self.maxIter = 80000
         if parser_dict['pace'] == 10:
             self.maxIter = 80000
         else:
             self.maxIter = 40000
         self.test_interval = 500  #
         self.test_batch_size = 16   #
-        self.train_batch_size = 32  # 
+        self.train_batch_size = 32  #
         self.test_iter = int(np.ceil(self.nTest / self.test_batch_size))
     
     def checkdir(self, tmp_dir):
@@ -170,8 +165,8 @@ class SPUDRFs():
         s.test_initialization = True
         return s
 
-    def train(self, pace):
-        print('0')
+    def train(self):
+        
 
         with open(join(self.tmp_dir, self.data + '-train'  + '.prototxt'), 'w') as f:
             f.write(str(self.make_net()))
@@ -210,33 +205,11 @@ class SPUDRFs():
         if not isfile(base_weights):
             print "There is not base model to %s"%(base_weights)
         
-        if pace == 0 or pace == 1:
-            prototxt='./tmp/0EPFL-VGG-NO-test.prototxt' 
-            print('=========================')
-            net = caffe.Net(prototxt, base_weights, caffe.TEST)
-            for p in solver.net.params:
-                param = solver.net.params[p][0].data[...]
-                print "  Before layer \"%s\":, parameter[0] mean=%f, std=%f"%(p, param.mean(), param.std())
-                solver.net.params[p][0].data[...] = net.params[p][0].data[...]
-                param = solver.net.params[p][0].data[...]
-                print "  After layer \"%s\":, parameter[0] mean=%f, std=%f"%(p, param.mean(), param.std())
-                # if 'conv' in p:
-                #     solver.net.params[p][0].data[...] = net.params[p][0].data[...]
-                #     param = solver.net.params[p][0].data[...]
-                #     print "  After layer \"%s\":, parameter[0] mean=%f, std=%f"%(p, param.mean(), param.std())
-        else:
-            solver.net.copy_from(base_weights)
-            for p in solver.net.params:
-                param = solver.net.params[p][0].data[...]
-                print "  After layer \"%s\":, parameter[0] mean=%f, std=%f"%(p, param.mean(), param.std())
+        solver.net.copy_from(base_weights)
+        for p in solver.net.params:
+            param = solver.net.params[p][0].data[...]
+            print "  After layer \"%s\":, parameter[0] mean=%f, std=%f"%(p, param.mean(), param.std())
 
-
-        # print "Summarize of net parameters:"
-        # for p in solver.net.params:
-        #   param = solver.net.params[p][0].data[...]
-        #   print "  layer \"%s\":, parameter[0] mean=%f, std=%f"%(p, param.mean(), param.std())
-        # print args
-        # print(iter)
         iter = 0
         while iter < self.maxIter:
             # print(0)
@@ -323,13 +296,4 @@ def conv_relu(bottom, nout, ks=3, stride=1, pad=1, mult=[1,1,2,0]):
 
 def max_pool(bottom, ks=2, stride=2):
     return L.Pooling(bottom, pool=P.Pooling.MAX, kernel_size=ks, stride=stride)
-
-
-if __name__ == '__main__':
-    dic ={'record': '1EPFL-VGG-0.15.record', 'data': '1EPFL-VGG-0.15', 'save': './checkpoints/',
-            'traintxt': './images/epfl/EPFL-train0.15.txt', 'testtxt': './images/epfl/EPFL-test0.15.txt',
-            'tmp_dir': './tmp/EPFL/', 'base_weights': './checkpoints/VGG_ILSVRC_16_layers.caffemodel'}
-    net = SPUDRFs(parser_dict=dic)
-    net.train(pace=0)
-
 
