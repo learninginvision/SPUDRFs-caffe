@@ -1,4 +1,3 @@
-
 import os
 import train
 import predict
@@ -21,10 +20,12 @@ for pace in range(0, len(alpha)+1):
     
     train_dict = {}
     train_dict['pace'] = pace
-    train_dict['record'] = str(pace) + 'EPFL-VGG-NO.record'
-    train_dict['data'] = str(pace) + 'EPFL-VGG-NO'
-    train_dict['save'] = './checkpoints/M' + str(Exp) + '/'
-    train_dict['tmp_dir'] = './tmp/Exp' + str(Exp) + '/'
+    train_dict['record'] = str(pace) + 'VGG.record'
+    train_dict['data'] = str(pace) + 'VGG'
+    train_dict['save'] = './checkpoints/M' + str(Exp) 
+    train_dict['tmp_dir'] = './tmp/Exp' + str(Exp) 
+    train_dict['testtxt'] = './images/MORPH-test.txt'
+
     if pace == 0:
         train_dict['traintxt'] = left_txt
         train_dict['base_weights'] = './model/VGG_FACE.caffemodel'
@@ -33,14 +34,13 @@ for pace in range(0, len(alpha)+1):
         train_dict['base_weights'] = './model/VGG_FACE.caffemodel'
     else:
         train_dict['traintxt'] = pick_txt
-        train_dict['base_weights'] = './checkpoints/M' + str(Exp) + '/' + str(pace-1) + \
-            'EPFL-VGG-NO_iter_{}.caffemodel'.format(max_step)
 
-    train_dict['testtxt'] = './images/MORPH-test.txt'
+        train_dict['base_weights'] = os.path.join('./checkpoints/M' + str(Exp), str(pace-1) + 'VGG_iter_{}.caffemodel'.format(max_step)) # Changed by xgtu
 
     print(train_dict)
     net = train.SPUDRFs(parser_dict=train_dict)
     net.train()
+    
     with open('./Entropy.txt', 'r') as f:
         lines = f.readlines()
     assert len(lines) > 2, 'train entropy.txt is null!'
@@ -54,17 +54,15 @@ for pace in range(0, len(alpha)+1):
         left_lines = f.readlines()
     if len(left_lines) > 0:
         pred_dict = {}
-        pred_dict['test'] = './images/txt-'+ str(Exp) + '/trainLeft' + str(pace) + '-0.15.txt'
-        pred_dict['predict'] = './MAE/mae' + str(Exp) + '/MAEOnTrainLeft' + str(pace) + '-0.15.txt'
-        pred_dict['deploy'] = train_dict['tmp_dir'] + str(pace) + 'EPFL-VGG-NO-deploy.prototxt'
-        pred_dict['model'] = train_dict['save'] + str(pace) + \
-                'EPFL-VGG-NO_iter_{}.caffemodel'.format(max_step)
+        pred_dict['test'] = os.path.join('./images/txt-'+ str(Exp), 'trainLeft' + str(pace) + '.txt') 
+        pred_dict['predict'] = os.path.join('./MAE/mae' + str(Exp), 'MAEOnTrainLeft' + str(pace) + '.txt') 
+        pred_dict['deploy'] = os.path.join(train_dict['tmp_dir'], str(pace) + 'VGG-deploy.prototxt')
+        pred_dict['model'] = os.path.join(train_dict['save'], str(pace) + 'VGG_iter_{}.caffemodel'.format(max_step)) 
+
         diff_ave = predict.Predict(pred_dict)
         with open('./Entropy.txt', 'r') as f:
             lines = f.readlines()
-        fn_save_entropy = './entropy/E' + str(Exp) + '/entropy' + str(pace) + '.txt'
-        with open(fn_save_entropy, 'w') as f:
+        fn_save_entropy = os.path.join('./entropy/E' + str(Exp), 'entropy' + str(pace) + '.txt') 
             f.writelines(lines)
 
         assert len(lines) > 2, 'predict entropy.txt is null!'
-
