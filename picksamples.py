@@ -4,16 +4,15 @@ import predict
 import random
 
 class PickSamples():
-
     def __init__(self, exp=0, percent=[0.5, 0.1, 0.1, 0.1, 0.1, 0.1], pace=0, alpha=[0.9, 0.9, 0.87, 0.85, 0.8, 0.8], 
                 ent_threshold=-4.2, diff_threshold=1.5, ent_pick_per=0.1, random_pick=False, 
                 soft=False,root='.', max_step=40000):
         self.max_step = max_step
         self.root = root
         self.exp = exp
-        self.root_image = self.root + '/images/txt-' + str(self.exp) + '/'
-        self.root_MAE = self.root + '/MAE/mae' + str(self.exp) + '/'
-        self.root_entropy = self.root + '/entropy/E' + str(self.exp) + '/'
+        self.root_image = os.path.join(self.root, 'images/txt{}'.format(self.exp))
+        self.root_MAE = os.path.join(self.root, 'MAE/mae{}'.format(self.exp))
+        self.root_entropy = os.path.join(self.root, 'entropy/E{}'.format(self.exp))
         self.checkdir(self.root_image)
         self.checkdir(self.root_MAE)
         self.checkdir(self.root_entropy)
@@ -27,7 +26,6 @@ class PickSamples():
         self.prefix_MAE = 'MAEOnTrainLeft'
         self.prefix_pick_ent = 'pick_ent'
         self.prefix_ent = 'entropy'
-        self.scale = 0.15
         self.alpha = alpha
         self.random_pick = random_pick
         self.soft = soft
@@ -46,7 +44,6 @@ class PickSamples():
             labels.append(float(label))
         self.dict_train = dict(zip(imgs, labels))
         
-
     def checkdir(self, tmp_dir):
         if not os.path.isdir(tmp_dir):
             os.makedirs(tmp_dir)
@@ -87,7 +84,8 @@ class PickSamples():
             fn = 'Entropy.txt'
             fn = root + fn
         else:
-            fn = prefix + str(int(pace)) + '-' + str(self.scale) + '.txt'
+            
+            fn = prefix + str(int(pace)) + '.txt'
             fn = os.path.join(root, fn)
 
         return fn
@@ -95,16 +93,18 @@ class PickSamples():
     def predict(self, pace=0, soft=False):
         para_dict = {}
         exp = str(self.exp)
+       
         if soft:
-            para_dict['predict'] = './MAE/mae' + exp + '/MAEOnTrainPick{}-0.15.txt'.format(pace)
-            para_dict['test'] = './images/txt-' + exp + '/trainPick{}-0.15.txt'.format(pace)
-            para_dict['model'] = './checkpoints/M'+exp+'/'+str(pace-1)+'EPFL-VGG-NO_iter_{}.caffemodel'.format(self.max_step)
-            para_dict['deploy'] = './tmp/Exp' + exp + '/' +str(pace-1)+ 'EPFL-VGG-NO-deploy.prototxt'
-        if not soft:
-            para_dict['predict'] = './MAE/mae' + exp + '/{}MAEOnTrainLeft0-0.15.txt'.format(pace-1)
-            para_dict['test'] = './images/txt-' + exp + '/trainLeft0-0.15.txt'
-            para_dict['model'] = './checkpoints/M' + exp + '/' + str(pace-1) + 'EPFL-VGG-NO_iter_{}.caffemodel'.format(self.max_step)
-            para_dict['deploy'] = './tmp/Exp' + exp + '/' +str(pace-1)+ 'EPFL-VGG-NO-deploy.prototxt'
+            para_dict['predict'] = os.path.join('./MAE/mae'.format(exp), 'MAEOnTrainPick{}.txt'.format(pace))
+            para_dict['test'] = os.path.join('./images/txt'.format(exp), 'trainPick{}.txt'.format(pace))
+            para_dict['model'] = os.path.join('./checkpoints/M'.format(exp), '{}VGG_iter_{}.caffemodel'.format(pace-1, self.max_step))
+            para_dict['deploy'] = os.path.join('./tmp/Exp'.format(exp), '{}VGG-deploy.prototxt'.format(pace-1))
+        if not soft: 
+            para_dict['predict'] = os.path.join('./MAE/mae'.format(exp), '{}MAEOnTrainLeft0.txt'.format(pace-1))
+            para_dict['test'] = os.path.join('./images/txt'.format(exp), 'trainLeft0.txt')
+            para_dict['model'] = os.path.join('./checkpoints/M'.format(exp), '{}VGG_iter_{}.caffemodel'.format(pace-1, self.max_step))
+            para_dict['deploy'] = os.path.join('./tmp/Exp'.format(exp), '{}VGG-deploy.prototxt'.format(pace-1))
+
         diff = predict.Predict(para_dict)
             
     def pick(self, pace=0):
@@ -131,9 +131,7 @@ class PickSamples():
             print('fn_train_left: %s' % (fn_train_left))
 
             pred = self.readtxt(fn_predictMAE)
-            
-            # new
-            fn_entropy = self.root_entropy + '/entropy' + str(pace-1) + '.txt'
+            fn_entropy = os.path.join(self.root_entropy, 'entropy{}.txt'.format(pace-1))
             entropy = self.readtxt(fn_entropy)
             assert len(entropy) == len(pred), 'entropy do not equal to pred %d vs %d' % (len(entropy), len(pred))
             for i, p in enumerate(pred):
@@ -174,7 +172,7 @@ class PickSamples():
                     pick_ent = lines[:len_lim]
                 else:
                     ent_all_txt_ = './entropy/E{}/entropyAll{}.txt'.format(self.exp, pace-1)
-                    fn_predictMAE = './MAE/mae{}/{}MAEOnTrainLeft0-0.15.txt'.format(self.exp, pace-1)
+                    fn_predictMAE = './MAE/mae{}/{}MAEOnTrainLeft0.txt'.format(self.exp, pace-1)
                     entropy2, pred2 = [], []
                     if os.path.exists(ent_all_txt_) and os.path.exists(fn_predictMAE):
                         entropy2 = self.readtxt(ent_all_txt_)
@@ -216,9 +214,8 @@ class PickSamples():
         self.savetxt(fn_save_pick, pick)
         self.savetxt(fn_save_left, left)
 
-        
+        # Mixture Weighting
         if self.soft and pace > 0:
-    
             ent_all_txt_ = './entropy/E{}/entropyAll{}.txt'.format(self.exp, pace-1)
             fn_predictMAE = './MAE/mae{}/{}MAEOnTrainLeft0-0.15.txt'.format(self.exp, pace-1)
             ent_all = self.readtxt(ent_all_txt_)
@@ -235,7 +232,6 @@ class PickSamples():
                 mae_pick.append(mae_all[idx])
                 ent_pick.append(ent_all[idx]) 
             print('mae_pick: ', len(mae_pick))
-            
 
             assert len(ent_pick) == len(mae_pick), 'entropy do not equal to pred %d vs %d' % (len(ent_pick), len(mae_pick))
             for i in range(len(mae_pick)):
@@ -253,8 +249,6 @@ class PickSamples():
             lambda_1 = pick_soft[int(num_pick*0.9)][1]
             epsilon = 1 / (1/lambda_1 - 1/lambda_0)
             pick_new = []
-
-            # Mixture Weighting
             for i, (img, diff) in enumerate(pick_soft):
                 label = str(int(self.dict_train[img]))
                 if i < num_pick*0.9:
@@ -265,14 +259,14 @@ class PickSamples():
             pick_soft = pick_new
 
         if self.soft:
-            fn_pick_soft = './images/txt-{}/trainPick_soft{}.txt'.format(self.exp, pace)
+            fn_pick_soft = './images/txt{}/trainPick_soft{}.txt'.format(self.exp, pace)
             self.savetxt(fn_pick_soft, pick_soft)
 
             print('new pick: %d' % len(pick_soft))
             print('entropy pick %d' % len(pick_ent))
             print('new left: %d' % len(left))
             if pace == 0:
-                fn_left_soft = './images/txt-{}/trainLeft_soft{}.txt'.format(self.exp, pace)
+                fn_left_soft = './images/txt{}/trainLeft_soft{}.txt'.format(self.exp, pace)
                 self.savetxt(fn_left_soft, left_soft)
                 return (fn_left_soft, fn_pick_soft)
             else:
