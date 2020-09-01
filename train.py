@@ -15,12 +15,11 @@ import matplotlib.pyplot as plt
 import argparse
 
 class SPUDRFs():
-
     def __init__(self, parser_dict):
+
         self.parser_dict = parser_dict
-            
-        self.record_filename = self.parser_dict['record']  
-        self.data = self.parser_dict['data']
+        self.record_filename = self.parser_dict['record']   
+        self.data = self.parser_dict['data']  
         self.save = self.parser_dict['save']
         self.checkdir(self.save)
         self.traintxt = self.parser_dict['traintxt']
@@ -41,7 +40,6 @@ class SPUDRFs():
         with open(self.testtxt,'r') as f:
             self.nTest = len(f.readlines())
 
-        
         self.testdir = "./Morph_mtcnn_1.3_0.35_0.3/"
         self.traindir = "./Morph_mtcnn_1.3_0.35_0.3/"
 
@@ -60,20 +58,20 @@ class SPUDRFs():
 
     def make_net(self, phase='train'):
         n = caffe.NetSpec()
-        if phase=='train':
+        if phase == 'train':
             batch_size = self.train_batch_size
             n.data, n.label = L.ImageMultilabelData(ntop=2,image_multilabel_data_param=dict(source=self.traintxt,root_folder=self.traindir,\
             shuffle=True,batch_size=batch_size,new_height=256,new_width=256,label_dim=2),
             transform_param=dict(mean_value=112,crop_size=224, mirror=True)
             )
             n.label1, n.label2 = L.Slice(n.label,ntop=2,slice_param=dict(axis=1,slice_point=1),name='slice')
-        elif phase=='test':
+        elif phase == 'test':
             batch_size = self.test_batch_size
             n.data, n.label = L.ImageData(ntop=2,image_data_param=dict(source=self.testtxt,root_folder=self.testdir,\
-            batch_size=batch_size,new_height=256,new_width=256),transform_param=dict(mean_value=112, crop_size=224, mirror=True) # , new_height=224,new_width=224
+            batch_size=batch_size,new_height=256,new_width=256),transform_param=dict(mean_value=112, crop_size=224, mirror=True) 
             )
         if phase == 'deploy':
-            n.data = L.Input(shape=dict(dim=[1,3,224,224]))  #  mall=(640, 480)
+            n.data = L.Input(shape=dict(dim=[1,3,224,224]))  
 
         n.conv1_1, n.relu1_1 = conv_relu(n.data, 64, mult=[10,10,20,0])
         n.conv1_2, n.relu1_2 = conv_relu(n.relu1_1, 64, mult=[10,10,20,0])
@@ -121,10 +119,12 @@ class SPUDRFs():
 
         if phase=='train':
             all_data_vec_length = int(50)
-            #all_data_vec_length = int(nTrain / train_batch_size)
-            n.loss = L.NeuralDecisionRegForestWithLoss(n.fc8, n.label1, n.label2, param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0),dict(lr_mult=0, decay_mult=0)], 
-                    neural_decision_forest_param=dict(depth=self.treeDepth, num_trees=self.ntree, num_classes=1, iter_times_class_label_distr=20, 
-                    iter_times_in_epoch=50, all_data_vec_length=all_data_vec_length, drop_out=self.drop, init_filename=self.init,record_filename=self.record_filename), name='probloss1')
+            n.loss = L.NeuralDecisionRegForestWithLoss(n.fc8, n.label1, n.label2, 
+                param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0),dict(lr_mult=0, decay_mult=0)], 
+                neural_decision_forest_param=dict(depth=self.treeDepth, num_trees=self.ntree, num_classes=1, iter_times_class_label_distr=20, 
+                iter_times_in_epoch=50, all_data_vec_length=all_data_vec_length, drop_out=self.drop, init_filename=self.init,record_filename=self.record_filename), 
+                name='probloss1')
+        
         elif phase=='test':
             n.pred = L.NeuralDecisionRegForest(n.fc8, n.label, neural_decision_forest_param=dict(depth=self.treeDepth, num_trees=self.ntree, num_classes=1), name='probloss1')
             n.MAE = L.MAE(n.pred, n.label)
@@ -139,6 +139,7 @@ class SPUDRFs():
             n.CS8 = L.CS(n.pred, n.label,cs_param = dict(lll = self.cs[8]))
             n.CS9 = L.CS(n.pred, n.label,cs_param = dict(lll = self.cs[9]))
             n.CS10 = L.CS(n.pred, n.label,cs_param = dict(lll = self.cs[10]))
+        
         elif phase=='deploy':
             n.pred = L.NeuralDecisionRegForest(n.fc8, neural_decision_forest_param=dict(depth=self.treeDepth, num_trees=self.ntree, num_classes=1), name='probloss1')
         return n.to_proto()
@@ -167,7 +168,6 @@ class SPUDRFs():
 
     def train(self):
         
-
         with open(join(self.tmp_dir, self.data + '-train'  + '.prototxt'), 'w') as f:
             f.write(str(self.make_net()))
         with open(join(self.tmp_dir, self.data + '-test'  + '.prototxt'), 'w') as f:
@@ -176,32 +176,15 @@ class SPUDRFs():
             f.write(str(self.make_net('deploy')))
         with open(join(self.tmp_dir, self.data + '-solver' + '.prototxt'), 'w') as f:
             f.write(str(self.make_solver()))
-        # if args.gpu<0:    
-        #   caffe.set_mode_cpu()
-        # else:
-        #   caffe.set_mode_gpu()
-        #   caffe.set_device(args.gpu)
 
         iter = 0
-        mae = []
-        cs__0 = []
-        cs__1 = []
-        cs__2 = []
-        cs__3 = []
-        cs__4 = []
-        cs__5 = []
-        cs__6 = []
-        cs__7 = []
-        cs__8 = []
-        cs__9 = []
-        cs__10 = []
+        mae, cs__0, cs__1, cs__2, cs__3, cs__4, cs__5, cs__6, cs__7, cs__8, cs__9, cs__10 = [], [], [], [], [], [], [], [], [], [], [], [] 
         
         caffe.set_mode_gpu()
-
         solver = caffe.SGDSolver(join(self.tmp_dir, self.data + '-solver' + '.prototxt'))
 
         base_weights = self.base_weights
-        # join(args.model)
+        
         if not isfile(base_weights):
             print "There is not base model to %s"%(base_weights)
         
@@ -212,10 +195,11 @@ class SPUDRFs():
 
         iter = 0
         while iter < self.maxIter:
-            # print(0)
+            
             solver.step(self.test_interval)
-            # print(1)
+            
             solver.test_nets[0].share_with(solver.net)
+            
             mae1 = np.float32(0.0)
             cs0 = np.float32(0.0)
             cs1 = np.float32(0.0)
@@ -228,6 +212,7 @@ class SPUDRFs():
             cs8 = np.float32(0.0)
             cs9 = np.float32(0.0)
             cs10 = np.float32(0.0)
+
             for t in range(self.test_iter):
                 output= solver.test_nets[0].forward()
                 mae1 += output['MAE']
@@ -242,6 +227,7 @@ class SPUDRFs():
                 cs8 += output['CS8']
                 cs9 += output['CS9']
                 cs10 += output['CS10']
+
             mae1 /= self.test_iter
             cs0 /= self.test_iter
             cs1 /= self.test_iter
@@ -254,6 +240,7 @@ class SPUDRFs():
             cs8 /= self.test_iter
             cs9 /= self.test_iter
             cs10 /= self.test_iter
+
             mae.append(mae1)
             cs__0.append(cs0)
             cs__1.append(cs1)
@@ -266,6 +253,8 @@ class SPUDRFs():
             cs__8.append(cs8)
             cs__9.append(cs9)
             cs__10.append(cs10)
+
+
             iter = iter + self.test_interval
             # print args
             print "Iter%d, currentMAE=%.4f, bestMAE=%.4f, currentCS0=%.4f, bestCS0=%.4f, currentCS1=%.4f, \
@@ -273,6 +262,7 @@ class SPUDRFs():
             bestCS4=%.4f, currentCS5=%.4f, bestCS5=%.4f, currentCS6=%.4f, bestCS6=%.4f, currentCS7=%.4f, \
             bestCS7=%.4f, currentCS8=%.4f, bestCS8=%.4f, currentCS9=%.4f, bestCS9=%.4f, currentCS10=%.4f, \
             bestCS10=%.4f"%(iter, mae[-1], min(mae), cs__0[-1], max(cs__0), cs__1[-1], max(cs__1), cs__2[-1], max(cs__2), cs__3[-1], max(cs__3), cs__4[-1], max(cs__4), cs__5[-1], max(cs__5), cs__6[-1], max(cs__6), cs__7[-1], max(cs__7), cs__8[-1], max(cs__8), cs__9[-1], max(cs__9), cs__10[-1], max(cs__10))
+
         mae = np.array(mae, dtype=np.float32)
         cs = np.array(cs__5, dtype=np.float32)
         sav_fn = join(self.tmp_dir, "MAE-%stree%ddepth%dtime%s"%(
@@ -283,8 +273,10 @@ class SPUDRFs():
         mat_dict = dict({'mae':mae,'cs':cs})
         mat_dict.update(self.parser_dict)  # save args to .mat
         savemat(sav_fn+'.mat', mat_dict)
-        # print args
-        print "Best MAE=%.4f, Best CS0=%.4f, Best CS1=%.4f, Best CS2=%.4f, Best CS3=%.4f, Best CS4=%.4f, Best CS5=%.4f, Best CS6=%.4f, Best CS7=%.4f, Best CS8=%.4f, Best CS9=%.4f, Best CS10=%.4f."%(mae.min(), max(cs__0), max(cs__1), max(cs__2), max(cs__3), max(cs__4), max(cs__5), max(cs__6), max(cs__7), max(cs__8), max(cs__9), max(cs__10))
+
+        print "Best MAE=%.4f, Best CS0=%.4f, Best CS1=%.4f, Best CS2=%.4f, Best CS3=%.4f, Best CS4=%.4f, Best CS5=%.4f, Best CS6=%.4f, Best CS7=%.4f, Best CS8=%.4f, Best CS9=%.4f, Best CS10=%.4f."%(
+            mae.min(), max(cs__0), max(cs__1), max(cs__2), max(cs__3), max(cs__4), max(cs__5), max(cs__6), max(cs__7), max(cs__8), max(cs__9), max(cs__10))
+        
         print "Done! Results saved at \'"+sav_fn+"\'"
 
 def conv_relu(bottom, nout, ks=3, stride=1, pad=1, mult=[1,1,2,0]):
