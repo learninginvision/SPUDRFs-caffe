@@ -19,7 +19,7 @@ class SPUDRFs():
 
         self.parser_dict = parser_dict
         self.record_filename = self.parser_dict['record']   
-        self.data = self.parser_dict['data']  
+        self.data = self.parser_dict['data'] 
         self.save = self.parser_dict['save']
         self.checkdir(self.save)
         self.traintxt = self.parser_dict['traintxt']
@@ -40,14 +40,14 @@ class SPUDRFs():
         with open(self.testtxt,'r') as f:
             self.nTest = len(f.readlines())
 
-        self.testdir = "./Morph_mtcnn_1.3_0.35_0.3/"
-        self.traindir = "./Morph_mtcnn_1.3_0.35_0.3/"
+        self.testdir = "/root/data/meng/dataset/Morph_mtcnn_1.3_0.35_0.3/"
+        self.traindir = "/root/data/meng/dataset/Morph_mtcnn_1.3_0.35_0.3/"
 
         if parser_dict['pace'] == 10:
             self.maxIter = 80000
         else:
             self.maxIter = 40000
-        self.test_interval = 500  #
+        self.test_interval = 1000  #
         self.test_batch_size = 16   #
         self.train_batch_size = 32  #
         self.test_iter = int(np.ceil(self.nTest / self.test_batch_size))
@@ -178,13 +178,15 @@ class SPUDRFs():
             f.write(str(self.make_solver()))
 
         iter = 0
-        mae, cs__0, cs__1, cs__2, cs__3, cs__4, cs__5, cs__6, cs__7, cs__8, cs__9, cs__10 = [], [], [], [], [], [], [], [], [], [], [], [] 
+      
+        mae, cs__0, cs__1, cs__2, cs__3, cs__4, cs__5, cs__6, cs__7, cs__8, cs__9, cs__10 = [], [], [], [], [], [], [], [], [], [], [], [] # Changed by xgtu
         
         caffe.set_mode_gpu()
+
         solver = caffe.SGDSolver(join(self.tmp_dir, self.data + '-solver' + '.prototxt'))
 
         base_weights = self.base_weights
-        
+
         if not isfile(base_weights):
             print "There is not base model to %s"%(base_weights)
         
@@ -256,12 +258,16 @@ class SPUDRFs():
 
 
             iter = iter + self.test_interval
-            # print args
-            print "Iter%d, currentMAE=%.4f, bestMAE=%.4f, currentCS0=%.4f, bestCS0=%.4f, currentCS1=%.4f, \
-            bestCS1=%.4f, currentCS2=%.4f, bestCS2=%.4f, currentCS3=%.4f, bestCS3=%.4f, currentCS4=%.4f, \
-            bestCS4=%.4f, currentCS5=%.4f, bestCS5=%.4f, currentCS6=%.4f, bestCS6=%.4f, currentCS7=%.4f, \
-            bestCS7=%.4f, currentCS8=%.4f, bestCS8=%.4f, currentCS9=%.4f, bestCS9=%.4f, currentCS10=%.4f, \
-            bestCS10=%.4f"%(iter, mae[-1], min(mae), cs__0[-1], max(cs__0), cs__1[-1], max(cs__1), cs__2[-1], max(cs__2), cs__3[-1], max(cs__3), cs__4[-1], max(cs__4), cs__5[-1], max(cs__5), cs__6[-1], max(cs__6), cs__7[-1], max(cs__7), cs__8[-1], max(cs__8), cs__9[-1], max(cs__9), cs__10[-1], max(cs__10))
+
+            print(
+                'Iter{:d}, currentMAE={:.4f}, bestMAE={:.4f}'.format(iter, mae[-1], min(mae)), 
+                'currentCS0={:.4f}, bestCS0={:.4f}, currentCS1={:.4f}, bestCS1={:.4f}'.format(cs__0[-1], max(cs__0), cs__1[-1], max(cs__1)),
+                'currentCS2={:.4f}, bestCS2={:.4f}, currentCS3={:.4f}, bestCS3={:.4f}'.format(cs__2[-1], max(cs__2), cs__3[-1], max(cs__3)),
+                'currentCS4={:.4f}, bestCS4={:.4f}, currentCS5={:.4f}, bestCS5={:.4f}'.format(cs__4[-1], max(cs__4), cs__5[-1], max(cs__5)),
+                'currentCS6={:.4f}, bestCS6={:.4f}, currentCS7={:.4f}, bestCS7={:.4f}'.format(cs__6[-1], max(cs__6), cs__7[-1], max(cs__7)),
+                'currentCS8={:.4f}, bestCS8={:.4f}, currentCS9={:.4f}, bestCS9={:.4f}'.format(cs__8[-1], max(cs__8), cs__9[-1], max(cs__9)),
+                'currentCS10={:.4f}, bestCS10={:.4f}'.format(cs__10[-1], max(cs__10))
+                )
 
         mae = np.array(mae, dtype=np.float32)
         cs = np.array(cs__5, dtype=np.float32)
@@ -271,12 +277,16 @@ class SPUDRFs():
         sav_fn_ = join(self.tmp_dir, 'MAE-%s' % self.data)
         np.save(sav_fn_ +'.npy', mae)
         mat_dict = dict({'mae':mae,'cs':cs})
-        mat_dict.update(self.parser_dict)  # save args to .mat
+        mat_dict.update(self.parser_dict) 
         savemat(sav_fn+'.mat', mat_dict)
 
-        print "Best MAE=%.4f, Best CS0=%.4f, Best CS1=%.4f, Best CS2=%.4f, Best CS3=%.4f, Best CS4=%.4f, Best CS5=%.4f, Best CS6=%.4f, Best CS7=%.4f, Best CS8=%.4f, Best CS9=%.4f, Best CS10=%.4f."%(
-            mae.min(), max(cs__0), max(cs__1), max(cs__2), max(cs__3), max(cs__4), max(cs__5), max(cs__6), max(cs__7), max(cs__8), max(cs__9), max(cs__10))
-        
+        print('Best MAE={:.4f}'.format(mae.min()),  
+              'Best CS0={:.4f}, Best CS1={:.4f}, Best CS2={:.4f}'.format(max(cs__0), max(cs__1), max(cs__2)), 
+              'Best CS3={:.4f}, Best CS4={:.4f}, Best CS5={:.4f}'.format(max(cs__3), max(cs__4), max(cs__5)), 
+              'Best CS6={:.4f}, Best CS7={:.4f}, Best CS8={:.4f}'.format(max(cs__6), max(cs__7), max(cs__8)),
+              'Best CS9={:.4f}, Best CS10={:.4f}'.format(max(cs__9), max(cs__10))
+            )
+
         print "Done! Results saved at \'"+sav_fn+"\'"
 
 def conv_relu(bottom, nout, ks=3, stride=1, pad=1, mult=[1,1,2,0]):
