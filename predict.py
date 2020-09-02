@@ -12,7 +12,7 @@ def Predict(para_dict):
     predict_txt = para_dict['predict'] 
     deploy_file = para_dict['deploy'] 
     model_file = para_dict['model'] 
-    root_dir=  './Morph_mtcnn_1.3_0.35_0.3/' 
+    root_dir=  "/root/data/meng/dataset/Morph_mtcnn_1.3_0.35_0.3/"
     TEST_TIMES = 1
 
     net = caffe.Net(deploy_file,model_file,caffe.TEST)
@@ -50,6 +50,7 @@ def Predict(para_dict):
         predict_age = predict_age_t/float(TEST_TIMES)
 
         diff = abs(true_age - predict_age)
+        
         diff_sum += diff
 
         print('Image name: %s, Truth age: %s, Predicted age: %f, absoulte diff: %f' % (img_name, true_age, predict_age, diff))
