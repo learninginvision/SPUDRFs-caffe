@@ -84,7 +84,6 @@ class PickSamples():
             fn = 'Entropy.txt'
             fn = root + fn
         else:
-            
             fn = prefix + str(int(pace)) + '.txt'
             fn = os.path.join(root, fn)
 
@@ -93,17 +92,16 @@ class PickSamples():
     def predict(self, pace=0, soft=False):
         para_dict = {}
         exp = str(self.exp)
-       
         if soft:
-            para_dict['predict'] = os.path.join('./MAE/mae'.format(exp), 'MAEOnTrainPick{}.txt'.format(pace))
-            para_dict['test'] = os.path.join('./images/txt'.format(exp), 'trainPick{}.txt'.format(pace))
-            para_dict['model'] = os.path.join('./checkpoints/M'.format(exp), '{}VGG_iter_{}.caffemodel'.format(pace-1, self.max_step))
-            para_dict['deploy'] = os.path.join('./tmp/Exp'.format(exp), '{}VGG-deploy.prototxt'.format(pace-1))
-        if not soft: 
-            para_dict['predict'] = os.path.join('./MAE/mae'.format(exp), '{}MAEOnTrainLeft0.txt'.format(pace-1))
-            para_dict['test'] = os.path.join('./images/txt'.format(exp), 'trainLeft0.txt')
-            para_dict['model'] = os.path.join('./checkpoints/M'.format(exp), '{}VGG_iter_{}.caffemodel'.format(pace-1, self.max_step))
-            para_dict['deploy'] = os.path.join('./tmp/Exp'.format(exp), '{}VGG-deploy.prototxt'.format(pace-1))
+            para_dict['predict'] = os.path.join('./MAE/mae{}'.format(exp), 'MAEOnTrainPick{}.txt'.format(pace))
+            para_dict['test'] = os.path.join('./images/txt{}'.format(exp), 'trainPick{}.txt'.format(pace))
+            para_dict['model'] = os.path.join('./checkpoints/M{}'.format(exp), '{}VGG_iter_{}.caffemodel'.format(pace-1, self.max_step))
+            para_dict['deploy'] = os.path.join('./tmp/Exp{}'.format(exp), '{}VGG-deploy.prototxt'.format(pace-1))
+        if not soft:           
+            para_dict['predict'] = os.path.join('./MAE/mae{}'.format(exp), '{}MAEOnTrainLeft0.txt'.format(pace-1))
+            para_dict['test'] = os.path.join('./images/txt{}'.format(exp), 'trainLeft0.txt')
+            para_dict['model'] = os.path.join('./checkpoints/M{}'.format(exp), '{}VGG_iter_{}.caffemodel'.format(pace-1, self.max_step))
+            para_dict['deploy'] = os.path.join('./tmp/Exp{}'.format(exp), '{}VGG-deploy.prototxt'.format(pace-1))
 
         diff = predict.Predict(para_dict)
             
@@ -131,6 +129,7 @@ class PickSamples():
             print('fn_train_left: %s' % (fn_train_left))
 
             pred = self.readtxt(fn_predictMAE)
+            
             fn_entropy = os.path.join(self.root_entropy, 'entropy{}.txt'.format(pace-1))
             entropy = self.readtxt(fn_entropy)
             assert len(entropy) == len(pred), 'entropy do not equal to pred %d vs %d' % (len(entropy), len(pred))
@@ -214,10 +213,10 @@ class PickSamples():
         self.savetxt(fn_save_pick, pick)
         self.savetxt(fn_save_left, left)
 
-        # Mixture Weighting
+        # Mixture Weighting 
         if self.soft and pace > 0:
             ent_all_txt_ = './entropy/E{}/entropyAll{}.txt'.format(self.exp, pace-1)
-            fn_predictMAE = './MAE/mae{}/{}MAEOnTrainLeft0-0.15.txt'.format(self.exp, pace-1)
+            fn_predictMAE = './MAE/mae{}/{}MAEOnTrainLeft0.txt'.format(self.exp, pace-1)
             ent_all = self.readtxt(ent_all_txt_)
             mae_all = self.readtxt(fn_predictMAE)
             print('mae_all: ', len(mae_all))
@@ -249,6 +248,7 @@ class PickSamples():
             lambda_1 = pick_soft[int(num_pick*0.9)][1]
             epsilon = 1 / (1/lambda_1 - 1/lambda_0)
             pick_new = []
+
             for i, (img, diff) in enumerate(pick_soft):
                 label = str(int(self.dict_train[img]))
                 if i < num_pick*0.9:
