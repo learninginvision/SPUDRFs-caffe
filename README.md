@@ -39,19 +39,30 @@ Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 ## Setup
 
 ### **Clone this repo:**  
-> git clone https://github.com/learninginvision/SPUDRFs   
-cd SPUDFRs   
+'''shell
+git clone https://github.com/learninginvision/SPUDRFs   
+cd SPUDFRs  
+'''
 
 ### **Train SPUDRFs:**  
-You can train your SPUDRFs from scratch easily by running **main.py**. Before you start training, you should complie **caffe** in directory **./caffe_soft**. Here is the description of the main codes.  
+Here is the description of the main codes.  
 - **main.py:**   
 train SPUDRFs from scratch  
 - **train.py:**   
-complete one pace training for given train set
+complete one pace training for a given train set
 - **predict.py:**   
-complete a test for given test set
+complete a test for a given test set
 - **picksamples.py:**   
-select samples for next pace  
+select samples for next pace    
 
+### Train your SPUDRFs from scratch
+'''shell
+cd SPUDRFs/caffe_soft
+sudo make clean
+sudo make all
+sudo make pycaffe
+cd ..
+python2 main.py
+'''
 ## Acknowledgments
 This code is inspired by [caffe-DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests).
