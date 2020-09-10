@@ -38,13 +38,17 @@ Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 
 ## Setup
 
+### requirements:
+- caffe
+- python 2.7  
+
 ### **Clone this repo:**  
 ```shell
 git clone https://github.com/learninginvision/SPUDRFs   
 cd SPUDFRs  
 ```
 
-### **Train SPUDRFs:**  
+### Code descritption: 
 Here is the description of the main codes.  
 - **main.py:**   
 train SPUDRFs from scratch  
@@ -64,5 +68,7 @@ sudo make pycaffe
 cd ..
 python2 main.py
 ```
+You can download the final model from here
+
 ## Acknowledgments
 This code is inspired by [caffe-DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests).
