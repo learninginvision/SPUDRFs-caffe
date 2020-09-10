@@ -38,7 +38,7 @@ Lili Pan, Shijie Ai, Yazhou Ren, Zenglin Xu. In ECCV2020.<br>
 
 ## Setup
 
-### requirements:
+### Requirements:
 - caffe
 - python 2.7  
 
