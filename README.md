@@ -68,7 +68,7 @@ sudo make pycaffe
 cd ..
 python2 main.py
 ```
-You can download the final model from here
+You can download the final model from [here](https://drive.google.com/file/d/1_bTdhAIOYR3VP63Ppr5m_fKMLt9gaj0i/view?usp=sharing)
 
 ## Acknowledgments
 This code is inspired by [caffe-DRFs](https://github.com/shenwei1231/caffe-DeepRegressionForests).
