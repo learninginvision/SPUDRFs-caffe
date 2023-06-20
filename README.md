@@ -1,7 +1,7 @@
 # Self-Paced Deep Regression Forests with Consideration on Underrepresented Examples
 
 <div align=center>
-<img src="https://github.com/learninginvision/SPUDRFs/blob/master/pic/Figure1.png" width="600">
+<img src="https://github.com/learninginvision/SPUDRFs-caffe/blob/master/pic/Figure1.png" width="600">
 </div>    
 
 
